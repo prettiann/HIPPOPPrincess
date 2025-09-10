@@ -70,27 +70,20 @@ trainee: {
   image: ...
   selected: false/true // whether user selected them
   eliminated: false/true
-  top6: false/true
+  top12: false/true
 }
 */
 function convertCSVArrayToTraineeData(csvArrays) {
   trainees = csvArrays.map(function(traineeArray, index) {
     trainee = {};
     trainee.name_romanized = traineeArray[0];
-    if (traineeArray[2] === "-") {
-      // trainee only has hangul
-      trainee.name_hangul = traineeArray[1];
-    } else {
-      trainee.name_japanese = traineeArray[1];
-      trainee.name_hangul = traineeArray[2];
     }
-    trainee.company = traineeArray[3];
-    trainee.nationality = traineeArray [4];
-    trainee.grade = traineeArray[5];
-    trainee.birthyear = traineeArray[6];
-    trainee.eliminated = traineeArray[7] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th col
-    trainee.top6 = traineeArray[7] === 't'; // sets trainee to top 8 if 't' appears in 7th column
-    trainee.id = parseInt(traineeArray[8]) - 1; // trainee id is the original ordering of the trainees in the first csv
+	trainee.name_hangul = traineeArray[1];
+    trainee.nationality = traineeArray [2];
+    trainee.birthyear = traineeArray[3];
+    trainee.eliminated = traineeArray[4] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th column
+    trainee.top12 = traineeArray[5] === 't'; // sets trainee to top 12 if 't' appears in 7th column
+    trainee.id = parseInt(traineeArray[6]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
       trainee.name_romanized.replaceAll(" ", "").replaceAll("-", "") + ".png";
     return trainee;
@@ -104,10 +97,8 @@ function newTrainee() {
   return {
     id: -1, // -1 denotes a blank trainee spot
     name_romanized: '&#8203;', // this is a blank character
-    company: '&#8203;', // this is a blank character
     nationality: '&#8203;',
     birthyear: '&#8203;',
-    grade: 'no',
     image: 'emptyrank.png',
   };
 }
@@ -115,7 +106,7 @@ function newTrainee() {
 // Constructor for a blank ranking list
 function newRanking() {
   // holds the ordered list of rankings that the user selects
-  let ranking = new Array(6);
+  let ranking = new Array(12);
   for (let i = 0; i < ranking.length; i++) {
     ranking[i] = newTrainee();
   }
@@ -181,14 +172,14 @@ function populateTable(trainees) {
 function populateTableEntry(trainee) {
   // eliminated will have value "eliminated" only if trainee is eliminated and showEliminated is true, otherwise this is ""
   let eliminated = (showEliminated && trainee.eliminated) && "eliminated";
-  let top6 = (showTop6 && trainee.top6) && "top6";
+  let top12 = (showTop12 && trainee.top12) && "top12";
   const tableEntry = `
   <div class="table__entry ${eliminated}">
     <div class="table__entry-icon">
       <img class="table__entry-img" src="assets/trainees/${trainee.image}" />
       <div class="table__entry-icon-border ${trainee.grade.toLowerCase()}-rank-border"></div>
       ${
-        top6 ? '<div class="table__entry-icon-crown"></div>' : ''
+        top12 ? '<div class="table__entry-icon-crown"></div>' : ''
       }
       ${
         trainee.selected ? '<img class="table__entry-check" src="assets/check.png"/>' : ""
@@ -197,8 +188,7 @@ function populateTableEntry(trainee) {
     <div class="table__entry-text">
       <span class="name"><strong>${trainee.name_romanized}</strong></span>
       <span class="hangul">(${trainee.name_hangul})</span>
-      <span class="nationalityandyear">${trainee.nationality.toUpperCase()} •
-      ${trainee.birthyear}</span>
+      <span class="birthyear">${trainee.birthyear}</span>
     </div>
   </div>`;
   return tableEntry;
@@ -244,19 +234,7 @@ function populateRanking() {
 
 const abbreviatedNationalities = {
   "JAPAN": "JPN 🇯🇵",
-  "CHINA": "CHN 🇨🇳",
-  "SOUTH KOREA": "KOR 🇰🇷",
-  "CANADA": "CAN 🇨🇦",
-  "AUSTRALIA": "AUS 🇦🇺",
-  "THAILAND": "THA 🇹🇭",
-  "MONGOLIA": "MNG 🇲🇳",
-  "MYANMAR": "MMR 🇲🇲",
-  "ITALY": "ITA 🇮🇹",
-  "PHILIPPINES": "PHL 🇵🇭",
-  "MALAYSIA": "MYS 🇲🇾",
-  "JAPAN/FRANCE": "JPN/FRA 🇯🇵🇫🇷",
-  "VIETNAM": "VNM 🇻🇳",
-  "JAPAN/AUSTRALIA": "JPN/AUS 🇯🇵🇦🇺"
+  "KOREA": "KOR 🇰🇷",
 }
 
 function populateRankingEntry(trainee, currRank) {
