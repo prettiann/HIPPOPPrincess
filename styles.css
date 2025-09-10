@@ -14,27 +14,32 @@ body {
 
 /* Top Banner */
 #top-banner {
-  background: linear-gradient(to right, var(--banner-bg-start) 50%, var(--banner-bg-end) 50%);
-  height: 140px;
+  background: linear-gradient(to bottom, #4f41a3 50%, #d4aafb 50%);
+  height: 150px; /* slightly bigger */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 10px;
 }
+
 #banner-image {
-  max-width: 150px;
-  margin-bottom: 8px;
+  max-width: 200px;
+  margin-bottom: 10px;
 }
 #banner-title {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 20px;
-  color: #fff;
+  font-size: 22px;
+  color: #ffffff;
+  margin: 0;
 }
+
 #banner-subtitle {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
-  color: #fff;
+  color: #ffffff;
+  margin: 0;
 }
 
 /* Layout */
