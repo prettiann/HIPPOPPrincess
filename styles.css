@@ -263,8 +263,8 @@ body {
   font-size: 10px;
   color: var(--other-name-gray);
 }
-.table__entry .nationalityandyear {
-  font-size: 8px;
+.table__entry .birthyear {
+  font-size: 7px;
   color: var(--affil-gray);
   display: block;
 }
