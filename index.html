@@ -7,33 +7,35 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <!-- Top Banner -->
-<div id="top-banner">
-  <img id="banner-image" src="assets/logo.png" alt="Logo"/>
-  <div id="banner-title">Unpretty Popstar: HIP POP Princess Ranker</div>
-  <div id="banner-subtitle">Make your top 12!</div>
-</div>
+  <div id="top-banner">
+    <img id="banner-image" src="assets/logo.png" alt="Logo">
+    <h1 id="banner-title">Unpretty Popstar : HIP POP Princess Ranker</h1>
+    <p id="banner-subtitle">Make your top 12!</p>
+  </div>
 
   <div class="flex-container">
-
     <!-- Trainee Table -->
     <div id="table">
       <div id="table__filter-container">
-        <input 
-          id="table__filter-input" 
-          type="text" 
-          placeholder="Search trainees..."
-        />
+        <input id="table__filter-input" type="text" placeholder="Search trainees..." onkeyup="filterTrainees(event)">
       </div>
-      <div id="table__entry-container"></div>
+      <div id="table__entry-container">
+        <!-- JS fills in trainees here -->
+      </div>
     </div>
 
     <!-- Pyramid Ranking -->
-    <div id="ranking__pyramid"></div>
-
+    <div id="ranking__pyramid">
+      <h2 id="ranking__title">My Pyramid</h2>
+      <!-- Rows populated by JS -->
+    </div>
   </div>
 
-  <script src="main.js"></script>
+  <!-- Share Link -->
+  <div id="sharelink-container">
+    <button id="getlink-button" onclick="generateShareLink()">Get Link</button>
+    <input id="getlink-textbox" type="text" readonly />
+    <button id="copylink-button" onclick="copyLink()">Copy</button>
+  </div>
 </body>
-</html>
