@@ -26,18 +26,23 @@ body {
   font-family: 'Open Sans', sans-serif;
   display: inline-block;
   min-width: 100%;
+  /*TODO: I had the weirdest bug where if i don't have this background white the top banner would disappear
+  it's super late right now and I'm not sure what is going on i need to look into this later */
   background-color: white;
 }
 
 /* Styles for banner */
 #top-banner {
-  background: radial-gradient(circle, var(--banner-bg-start), var(--banner-bg-end) 70%);
+  background: radial-gradient(circle, var(--banner-bg-start), var(--banner-bg-end) 60%);
   /* background-color: var(--banner-bg-color); */
   padding: 25px;
+
+  /* these will be unnecessary once we get the banner image */
+  color: white;
   text-align: center;
 }
 #banner-image {
-  width: 250px;
+  width: 125px;
   margin-bottom: 15px;
 }
 #banner-title {
@@ -94,15 +99,6 @@ body {
   color: var(--affil-gray);
 }
 
-/* Styles for filtering at bottom of table */
-#filters-container {
-  margin: 10px;
-}
-.checkbox-label {
-  font-size: 12px;
-  color: var(--affil-gray);
-}
-
 /* Styles for share link functionality */
 #sharelink-container {
   margin: 10px;
@@ -112,14 +108,14 @@ body {
   border: none;
   border-radius: 3px;
   padding: 4px 6px 4px 6px;
-  background-color: #a5a5a5;
+  background-color: var(--a-rank);
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: white;
 }
 #getlink-button:active { /* these styles are active while get link is being pressed */
-  background-color: #ebebeb;
+  background-color: #ff2475;
 }
 #getlink-textbox {
   margin-left: 5px;
