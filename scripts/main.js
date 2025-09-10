@@ -81,8 +81,8 @@ function convertCSVArrayToTraineeData(csvArrays) {
 	trainee.name_hangul = traineeArray[1];
     trainee.nationality = traineeArray [2];
     trainee.birthyear = traineeArray[3];
-    trainee.eliminated = traineeArray[4] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th column
-    trainee.top12 = traineeArray[5] === 't'; // sets trainee to top 12 if 't' appears in 7th column
+    trainee.eliminated = traineeArray[4] === 'e'; // sets trainee to be eliminated if 'e' appears in 4th column
+    trainee.top12 = traineeArray[5] === 't'; // sets trainee to top 12 if 't' appears in 4th column
     trainee.id = parseInt(traineeArray[6]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
       trainee.name_romanized.replaceAll(" ", "").replaceAll("-", "") + ".png";
