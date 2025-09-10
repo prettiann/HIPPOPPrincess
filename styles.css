@@ -3,7 +3,7 @@
   --banner-bg-start: #dfc5e0;
   --banner-bg-end: #92668d;
   --produce-gray: #e4e4e4;
-  --search-text-gray: #s949494;
+  --search-text-gray: #e4cdea;
   --search-gray: #f2f2f2;
   --affil-gray: #909090;
   --name-gray: #2b2b2b;
@@ -35,7 +35,7 @@ body {
 #top-banner {
   background: radial-gradient(circle, var(--banner-bg-start), var(--banner-bg-end) 60%);
   /* background-color: var(--banner-bg-color); */
-  padding: 25px;
+  padding: 15px;
 
   /* these will be unnecessary once we get the banner image */
   color: white;
@@ -260,11 +260,11 @@ body {
   color: var(--name-gray);
 }
 .table__entry .hangul {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--other-name-gray);
 }
 .table__entry .nationalityandyear {
-  font-size: 10px;
+  font-size: 8px;
   color: var(--affil-gray);
   display: block;
 }
