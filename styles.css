@@ -13,109 +13,50 @@ body {
 }
 
 #top-banner {
-  width: 100%;
-  height: 140px; /* slightly bigger */
+  background: linear-gradient(to bottom, #4f41a3 50%, #d4aafb 50%);
+  height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(to bottom, #4f41a3 50%, #d4aafb 50%);
 }
 
-#banner-image {
-  max-width: 150px;
-  margin-bottom: 10px;
+#banner-title, #banner-subtitle {
+  margin: 0;
+  color: #fff;
 }
 
-#banner-title {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 20px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-#banner-subtitle {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-/* Layout */
 .flex-container {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  justify-content: center;
+  margin: 20px;
 }
 
 /* Table */
 #table {
-  width: 280px;
-  border: 1px solid var(--produce-gray);
+  width: 300px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 2px 4px 0.1px var(--produce-gray);
-}
-#table__filter-container {
-  padding: 8px;
-  border-bottom: 1px solid var(--produce-gray);
-}
-#table__filter-input {
-  width: 100%;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--produce-gray);
-}
-#table__entry-container {
-  max-height: 600px;
   overflow-y: auto;
 }
-.table__entry {
-  display: flex;
-  align-items: center;
-  padding: 6px;
-  border-bottom: 1px solid var(--produce-gray);
-  cursor: pointer;
-}
-.table__entry:hover {
-  background-color: #f0f0f0;
-}
-.table__entry-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 8px;
-}
-.table__entry-text .name {
-  font-weight: bold;
-  font-size: 14px;
-  color: var(--name-gray);
-}
-.table__entry-text .hangul {
-  font-size: 12px;
-  color: var(--other-name-gray);
-}
 
-/* Ranking Pyramid */
+/* Pyramid */
 #ranking__pyramid {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
 }
 .ranking__row {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
+  gap: 10px;
 }
 .ranking__entry-view {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 .ranking__entry-img {
   width: 100%;
@@ -123,21 +64,16 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
-.ranking__entry-icon-border {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: 3px solid #fff;
-  border-radius: 50%;
-}
 .ranking__entry-icon-crown {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   top: -5px;
   right: -5px;
-  background: url("assets/crown.png") no-repeat center;
+  background: url("assets/crown.PNG") no-repeat center;
   background-size: contain;
+}
+
 }
 .ranking__entry-icon-badge {
   position: absolute;
