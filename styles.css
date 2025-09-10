@@ -20,7 +20,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* Top half dark purple, bottom half light purple */
   background: linear-gradient(to bottom, #4f41a3 50%, #d4aafb 50%);
 }
 
