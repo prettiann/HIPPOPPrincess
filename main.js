@@ -41,76 +41,92 @@ const trainees = [
   {name_romanized:"Choi Gayoon", name_hangul:"최가윤", nationality:"KOREA", birthyear:200?, image:"ChoiGayoon.png"}
 ];
 
-let filteredTrainees = [...trainees];
+// =======================
+// GLOBAL VARIABLES
+// =======================
 let ranking = Array(12).fill(null);
+let showTop12 = true;
 
-// Populate table, pyramid, filtering same as before
-function populateTable(list){
+// =======================
+// HELPER FUNCTIONS
+// =======================
+function renderTable() {
   const container = document.getElementById("table__entry-container");
-  container.innerHTML="";
-  list.forEach(t=>{
+  container.innerHTML = "";
+  trainees.forEach((t, index) => {
     const entry = document.createElement("div");
-    entry.className="table__entry";
+    entry.className = "table__entry";
+    entry.dataset.index = index;
     entry.innerHTML = `
-      <img class="table__entry-img" src="assets/trainees/${t.image}">
+      <img class="table__entry-img" src="assets/trainees/${t.image}" />
       <div class="table__entry-text">
-        <div class="name">${t.name_romanized}</div>
-        <div class="hangul">${t.name_hangul}</div>
-        <div class="year">${t.birthyear?new Date().getFullYear()-t.birthyear+" yrs":""}</div>
+        <div class="name">${t.name}</div>
+        <div class="hangul">${t.hangul}</div>
+        <div class="natl">${t.nationality}</div>
+        <div class="year">${t.birthyear ? new Date().getFullYear() - t.birthyear : ""} yrs</div>
       </div>
     `;
-    entry.addEventListener("click", ()=>toggleRanking(t));
+    entry.addEventListener("click", () => toggleRank(t));
     container.appendChild(entry);
   });
 }
 
-document.getElementById("table__filter-input").addEventListener("keyup",(e)=>{
-  const q = e.target.value.toLowerCase();
-  filteredTrainees = trainees.filter(t=>t.name_romanized.toLowerCase().includes(q));
-  populateTable(filteredTrainees);
-});
-
-function toggleRanking(t){
-  const idx = ranking.indexOf(t);
-  if(idx>=0){ ranking[idx]=null; }
-  else{
-    const empty = ranking.indexOf(null);
-    if(empty>=0) ranking[empty]=t;
-  }
-  populateRanking();
-}
-
-function populateRanking(){
+function renderRanking() {
   const pyramid = document.getElementById("ranking__pyramid");
-  pyramid.innerHTML='<h2 id="ranking__title">My Pyramid</h2>';
-  const rows=[1,2,4,5];
-  let rankIndex=0;
-  rows.forEach(n=>{
+  pyramid.innerHTML = "";
+  const rows = [1, 2, 4, 5]; // row sizes
+  let idx = 0;
+
+  rows.forEach(rowSize => {
     const row = document.createElement("div");
-    row.className="ranking__row";
-    for(let i=0;i<n;i++){
-      const t = ranking[rankIndex];
+    row.className = "ranking__row";
+    for (let i = 0; i < rowSize; i++) {
+      const t = ranking[idx];
       const entry = document.createElement("div");
-      entry.className="ranking__entry";
+      entry.className = "ranking__entry";
       entry.innerHTML = `
         <div class="ranking__entry-view">
-          <img class="ranking__entry-img" src="${t?t.image:'assets/crown.png'}">
+          <img class="ranking__entry-img" src="${t ? "assets/trainees/"+t.image : "assets/crown.PNG"}" />
           <div class="ranking__entry-icon-border"></div>
-          ${t?'<div class="ranking__entry-icon-crown"></div>':''}
-          <div class="ranking__entry-icon-badge">${rankIndex+1}</div>
+          ${t ? '<div class="ranking__entry-icon-crown"></div>' : ''}
+          <div class="ranking__entry-icon-badge">${idx+1}</div>
         </div>
         <div class="ranking__row-text">
-          <div class="name">${t?t.name_romanized:'Empty'}</div>
-          <div class="year">${t?t.birthyear:''}</div>
+          <div class="name">${t ? t.name : "Empty"}</div>
+          <div class="hangul">${t ? t.hangul : ""}</div>
         </div>
       `;
+      entry.addEventListener("click", () => removeRank(idx));
       row.appendChild(entry);
-      rankIndex++;
+      idx++;
     }
     pyramid.appendChild(row);
   });
 }
 
-// Initial render
-populateTable(filteredTrainees);
-populateRanking();
+function toggleRank(trainee) {
+  // find first empty spot
+  const emptyIdx = ranking.findIndex(r => r === null);
+  if (emptyIdx !== -1 && !ranking.includes(trainee)) {
+    ranking[emptyIdx] = trainee;
+  } else if (ranking.includes(trainee)) {
+    // already ranked, remove
+    const removeIdx = ranking.indexOf(trainee);
+    ranking[removeIdx] = null;
+  }
+  renderRanking();
+}
+
+// remove from ranking by index
+function removeRank(index) {
+  ranking[index] = null;
+  renderRanking();
+}
+
+// =======================
+// INIT
+// =======================
+window.addEventListener("load", () => {
+  renderTable();
+  renderRanking();
+});
