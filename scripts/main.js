@@ -62,10 +62,7 @@ trainee: {
   id: ... // position in csv used for simple recognition
   name_romanized: ...
   name_hangul: ...
-  name_japanese: ...
-  company: ...
   nationality: ...
-  grade: a/b/c/d/f
   birthyear: ...
   image: ...
   selected: false/true // whether user selected them
@@ -232,15 +229,9 @@ function populateRanking() {
   }
 }
 
-const abbreviatedNationalities = {
-  "JAPAN": "JPN 🇯🇵",
-  "KOREA": "KOR 🇰🇷",
-}
-
 function populateRankingEntry(trainee, currRank) {
-  let modifiedNationality = trainee.birthyear;
   let eliminated = (showEliminated && trainee.eliminated) && "eliminated";
-  let top6 = (showTop6 && trainee.top6) && "top6";
+  let top12 = (showTop12 && trainee.top12) && "top12";
   const rankingEntry = `
   <div class="ranking__entry ${eliminated}">
     <div class="ranking__entry-view">
@@ -250,12 +241,12 @@ function populateRankingEntry(trainee, currRank) {
       </div>
       <div class="ranking__entry-icon-badge bg-${trainee.grade.toLowerCase()}">${currRank}</div>
       ${
-        top6 ? '<div class="ranking__entry-icon-crown"></div>' : ''
+        top12 ? '<div class="ranking__entry-icon-crown"></div>' : ''
       }
     </div>
     <div class="ranking__row-text">
       <div class="name"><strong>${trainee.name_romanized}</strong></div>
-      <div class="nationality">${modifiedNationality}</div>
+      <div class="company">${modifiedCompany}</div>
     </div>
   </div>`;
   return rankingEntry;
@@ -307,16 +298,12 @@ function swapTrainees(index1, index2) {
 // <original>: [<alternate1>, <alternate2>, <alternate3>, etc...]
 // <original> is the original name as appearing on csv
 // all of it should be lower case
-const alternateRomanizations = {
-  'aki':['thailand']
-};
-
 // uses the current filter text to create a subset of trainees with matching info
 function filterTrainees(event) {
   let filterText = event.target.value.toLowerCase();
-  // filters trainees based on name, alternate names, company, nationality and birth year
+  // filters trainees based on name, alternate names, and company
   filteredTrainees = trainees.filter(function (trainee) {
-    let initialMatch = includesIgnCase(trainee.name_romanized, filterText) || includesIgnCase (trainee.company, filterText) || includesIgnCase (trainee.birthyear, filterText) || includesIgnCase (trainee.nationality, filterText);
+    let initialMatch = includesIgnCase(trainee.name_romanized, filterText) || includesIgnCase(trainee.company, filterText);
     // if alernates exists then check them as well
     let alternateMatch = false;
     let alternates = alternateRomanizations[trainee.name_romanized.toLowerCase()]
@@ -333,7 +320,7 @@ function filterTrainees(event) {
 
 // Checks if mainString includes a subString and ignores case
 function includesIgnCase(mainString, subString) {
-  return mainString.toString().toLowerCase().includes(subString.toLowerCase());
+  return mainString.toLowerCase().includes(subString.toLowerCase());
 }
 
 // Finds the first blank spot for
@@ -357,7 +344,7 @@ function removeRankedTrainee(trainee) {
   return false;
 }
 
-const currentURL = "https://makemate1ss.github.io/";
+const currentURL = "https://prettiann.github.io/HIPPOPPrincess/";
 // Serializes the ranking into a string and appends that to the current URL
 function generateShareLink() {
   let shareCode = ranking.map(function (trainee) {
@@ -389,7 +376,7 @@ var trainees = [];
 var filteredTrainees = [];
 // holds the ordered list of rankings that the user selects
 var ranking = newRanking();
-const rowNums = [1,2,3];
+const rowNums = [1, 2, 4, 5];
 //window.addEventListener("load", function () {
   populateRanking();
   readFromCSV("./trainee_info.csv");
