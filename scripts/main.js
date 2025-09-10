@@ -62,7 +62,9 @@ trainee: {
   id: ... // position in csv used for simple recognition
   name_romanized: ...
   name_hangul: ...
-  nationality: ...
+  name_japanese: ...
+  company: ...
+  grade: a/b/c/d/f
   birthyear: ...
   image: ...
   selected: false/true // whether user selected them
@@ -74,15 +76,21 @@ function convertCSVArrayToTraineeData(csvArrays) {
   trainees = csvArrays.map(function(traineeArray, index) {
     trainee = {};
     trainee.name_romanized = traineeArray[0];
+    if (traineeArray[2] === "-") {
+      // trainee only has hangul
+      trainee.name_hangul = traineeArray[1];
+    } else {
+      trainee.name_japanese = traineeArray[1];
+      trainee.name_hangul = traineeArray[2];
     }
-	trainee.name_hangul = traineeArray[1];
-    trainee.nationality = traineeArray [2];
-    trainee.birthyear = traineeArray[3];
-    trainee.eliminated = traineeArray[4] === 'e'; // sets trainee to be eliminated if 'e' appears in 4th column
-    trainee.top12 = traineeArray[5] === 't'; // sets trainee to top 12 if 't' appears in 4th column
-    trainee.id = parseInt(traineeArray[6]) - 1; // trainee id is the original ordering of the trainees in the first csv
+    trainee.company = traineeArray[3];
+    trainee.grade = traineeArray[4];
+    trainee.birthyear = traineeArray[5];
+    trainee.eliminated = traineeArray[6] === 'e'; // sets trainee to be eliminated if 'e' appears in 6th col
+    trainee.top12 = traineeArray[6] === 't'; // sets trainee to top 12 if 't' appears in 6th column
+    trainee.id = parseInt(traineeArray[7]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
-      trainee.name_romanized.replaceAll(" ", "").replaceAll("-", "") + ".png";
+      trainee.name_romanized.replace(" ", "").replace("-", "") + ".jpg";
     return trainee;
   });
   filteredTrainees = trainees;
@@ -94,8 +102,8 @@ function newTrainee() {
   return {
     id: -1, // -1 denotes a blank trainee spot
     name_romanized: '&#8203;', // this is a blank character
-    nationality: '&#8203;',
-    birthyear: '&#8203;',
+    company: '&#8203;', // this is a blank character
+    grade: 'no',
     image: 'emptyrank.png',
   };
 }
@@ -185,7 +193,8 @@ function populateTableEntry(trainee) {
     <div class="table__entry-text">
       <span class="name"><strong>${trainee.name_romanized}</strong></span>
       <span class="hangul">(${trainee.name_hangul})</span>
-      <span class="birthyear">${trainee.birthyear}</span>
+      <span class="companyandyear">${trainee.company.toUpperCase()} •
+      ${trainee.birthyear}</span>
     </div>
   </div>`;
   return tableEntry;
@@ -229,7 +238,18 @@ function populateRanking() {
   }
 }
 
+const abbreviatedCompanies = {
+  "RAINBOW BRIDGE WORLD": "RBW",
+  "BLOCKBERRY CREATIVE": "BBC",
+  "INDIVIDUAL TRAINEE": "INDIVIDUAL",
+}
+
 function populateRankingEntry(trainee, currRank) {
+  let modifiedCompany = trainee.company.toUpperCase();
+  modifiedCompany = modifiedCompany.replace("ENTERTAINMENT", "ENT.");
+  if (abbreviatedCompanies[modifiedCompany]) {
+    modifiedCompany = abbreviatedCompanies[modifiedCompany];
+  }
   let eliminated = (showEliminated && trainee.eliminated) && "eliminated";
   let top12 = (showTop12 && trainee.top12) && "top12";
   const rankingEntry = `
@@ -344,7 +364,7 @@ function removeRankedTrainee(trainee) {
   return false;
 }
 
-const currentURL = "https://prettiann.github.io/HIPPOPPrincess/";
+const currentURL = "https://produce48.github.io/";
 // Serializes the ranking into a string and appends that to the current URL
 function generateShareLink() {
   let shareCode = ranking.map(function (trainee) {
