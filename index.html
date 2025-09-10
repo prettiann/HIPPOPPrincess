@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+html><head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122340888-1"></script>
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-PXWG5Z7E7Z&amp;cx=c&amp;gtm=4e5981"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-122340888-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -11,19 +9,19 @@
     gtag('config', 'UA-122340888-1');
   </script>
 
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Unpretty Rapstar Ranker</title>
+  <title>Produce 48 Ranker</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <meta name="viewport" content="initial-scale = 2.0, maximum-scale=1.0" />
-  <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <meta name="viewport" content="initial-scale = 2.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Condensed:400,700" rel="stylesheet">
 </head>
 <body>
   <div id="top-banner">
-    <img id="banner-image" src="assets/logo.png"/>
-    <p id="banner-title">UNPRETTY RAPSTAR RANKER</p>
+    <img id="banner-image" src="assets/logo_white.png">
+    <p id="banner-title">PRODUCE 48 RANKER</p>
     <p id="banner-subtitle">Make your own top 12!</p>
   </div>
   <div class="flex-container padded-box">
@@ -33,11 +31,22 @@
       </div>
       <div id="table">
         <div id="table__filter-container">
-          <input id="table__filter-input" oninput="filterTrainees(event)" type="text" placeholder="Search"/>
-</div>
-<div id="table__entry-container">
-
-  <!-- JAPANESE TRAINEES -->
+          <input id="table__filter-input" oninput="filterTrainees(event)" type="text" placeholder="Search">
+        </div>
+        <div id="table__entry-container">
+          <!-- <div class="table__entry">
+            <div class="table__entry-icon">
+              <img class="table__entry-img" src="assets/trainees/LeeGaeun.jpg" />
+              <div class="table__entry-icon-border a-rank-border"></div>
+              <img class="table__entry-check" src="assets/check.png"/>
+            </div>
+            <div class="table__entry-text">
+              <strong><span class="name">Lee Gaeun</span></strong>
+              <span class="hangul">(이가은)</span>
+              <span class="company">PLEDIS ENTERTAINMENT</span>
+            </div>
+          </div> -->
+          
   <div class="table__entry">
     <div class="table__entry-icon">
       <img class="table__entry-img" src="assets/trainees/Yunon.png" />
@@ -366,13 +375,13 @@
 
   <div class="table__entry">
     <div class="table__entry-icon">
-      <img class="table__entry-img" src="assets/trainees/RyuHajinA.png" />
+      <img class="table__entry-img" src="assets/trainees/RyuHajin.png" />
       <div class="table__entry-icon-border a-rank-border"></div>
       <img class="table__entry-check" src="assets/check.png"/>
     </div>
     <div class="table__entry-text">
-      <strong><span class="name">Ryu Hajin A</span></strong>
-      <span class="hangul">(류하진 A)</span>
+      <strong><span class="name">Ryu Hajin</span></strong>
+      <span class="hangul">(류하진)</span>
       <span class="birthyear">200?</span>
     </div>
   </div>
@@ -522,12 +531,12 @@
 
   <div class="table__entry">
     <div class="table__entry-icon">
-      <img class="table__entry-img" src="assets/trainees/HanHeeheon.png" />
+      <img class="table__entry-img" src="assets/trainees/HanHeeyeon.png" />
       <div class="table__entry-icon-border a-rank-border"></div>
       <img class="table__entry-check" src="assets/check.png"/>
     </div>
     <div class="table__entry-text">
-      <strong><span class="name">Han Heeheon</span></strong>
+      <strong><span class="name">Han Heeyeon</span></strong>
       <span class="hangul">(한희연)</span>
       <span class="birthyear">200?</span>
     </div>
@@ -557,30 +566,43 @@
       <span class="hangul">(최가윤)</span>
       <span class="birthyear">200?</span>
     </div>
-  </div>
-        </div>
+ </div>
+  <div class="table__entry false">
+    <div class="table__entry-icon">
+      <img class="table__entry-img" src="assets/trainees/UmeyamaCocona.jpg">
+      <div class="table__entry-icon-border --rank-border"></div>
+      
+      
+    </div>
+    <div class="table__entry-text">
+      <span class="name"><strong>Umeyama Cocona</strong></span>
+      <span class="hangul">(우메야마 코코나)</span>
+      <span class="companyandyear">NMB48 •
+      2003</span>
+    </div>
+  </div></div>
       </div>
       <div id="filters-container">
         <div id="filters-header"><strong>Filters</strong></div>
         <div>
-          <input type="checkbox" name="show-eliminated" id="show-eliminated" onclick="showEliminatedClick(event)"/>
+          <input type="checkbox" name="show-eliminated" id="show-eliminated" onclick="showEliminatedClick(event)">
           <label class="checkbox-label" for="show-eliminated">Show Eliminated (At Bottom)</label>
         </div>
         <div>
-          <input type="checkbox" name="show-top12" id="show-top12" onclick="showTop8Click(event)"/>
+          <input type="checkbox" name="show-top12" id="show-top12" onclick="showTop12Click(event)">
           <label class="checkbox-label" for="show-top12">Show Current Top 12</label>
         </div>
       </div>
       <div id="sharelink-container">
         <!-- button -->
-        <input type="button" id="getlink-button" value="Get link" onclick="generateShareLink()"/>
+        <input type="button" id="getlink-button" value="Get link" onclick="generateShareLink()">
         <!-- text box -->
-        <input type="text" placeholder="http://" id="getlink-textbox" readonly/>
+        <input type="text" placeholder="http://" id="getlink-textbox" readonly="">
         <!-- button in text box -->
-        <input type="button" id="copylink-button" value="Copy" onclick="copyLink()"/>
+        <input type="button" id="copylink-button" value="Copy" onclick="copyLink()">
       </div>
     </div>
-<div id="ranking__pyramid">
+    <div id="ranking__pyramid">
       <div id="ranking__title"><strong>TOP 12</strong></div>
       <div class="ranking__row">
         <!-- <div class="ranking__entry">
@@ -767,6 +789,8 @@
     </div>
   </div></div>
     </div>
+  </div>
+
   <!-- Load in script files -->
   <script src="scripts/csv.js"></script>
   <script src="scripts/dragula.min.js"></script>
@@ -774,5 +798,5 @@
   <script src="scripts/traineesort.js"></script>
   <script src="scripts/main.js"></script>
 
-</body>
-</html>
+
+</body></html>
