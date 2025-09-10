@@ -131,7 +131,7 @@ body {
   height: 20px;
   top: -5px;
   right: -5px;
-  background: url("assets/crown.PNG") no-repeat center;
+  background: url("assets/crown.png") no-repeat center;
   background-size: contain;
 }
 .ranking__entry-icon-badge {
