@@ -238,18 +238,13 @@ function populateRanking() {
   }
 }
 
-const abbreviatedCompanies = {
-  "RAINBOW BRIDGE WORLD": "RBW",
-  "BLOCKBERRY CREATIVE": "BBC",
-  "INDIVIDUAL TRAINEE": "INDIVIDUAL",
+const abbreviatedNationalities = {
+  "JAPAN": "JPN 🇯🇵",
+  "SOUTH KOREA": "KOR 🇰🇷",
 }
 
 function populateRankingEntry(trainee, currRank) {
-  let modifiedCompany = trainee.company.toUpperCase();
-  modifiedCompany = modifiedCompany.replace("ENTERTAINMENT", "ENT.");
-  if (abbreviatedCompanies[modifiedCompany]) {
-    modifiedCompany = abbreviatedCompanies[modifiedCompany];
-  }
+  let modifiedNationality = trainee.birthyear;
   let eliminated = (showEliminated && trainee.eliminated) && "eliminated";
   let top12 = (showTop12 && trainee.top12) && "top12";
   const rankingEntry = `
@@ -318,6 +313,11 @@ function swapTrainees(index1, index2) {
 // <original>: [<alternate1>, <alternate2>, <alternate3>, etc...]
 // <original> is the original name as appearing on csv
 // all of it should be lower case
+const alternateRomanizations = {
+  'yun seoyoung': ['yoon seoyoung'],
+  'yang jaeyun': ['yang jaeyoon'],
+};
+
 // uses the current filter text to create a subset of trainees with matching info
 function filterTrainees(event) {
   let filterText = event.target.value.toLowerCase();
