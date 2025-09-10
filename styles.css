@@ -9,7 +9,7 @@
   --name-gray: #2b2b2b;
   --other-name-gray: #2b2b2b;
   --ranking-affil-grayb: #989898;
-  --save-box-gray: #b1bb1b1;
+  --save-box-gray: #bbb1b1;
   --checked-green: #097231;
 
   /* ranking border colors */
@@ -26,18 +26,13 @@ body {
   font-family: 'Open Sans', sans-serif;
   display: inline-block;
   min-width: 100%;
-  /*TODO: I had the weirdest bug where if i don't have this background white the top banner would disappear
-  it's super late right now and I'm not sure what is going on i need to look into this later */
   background-color: white;
 }
 
 /* Styles for banner */
 #top-banner {
   background: radial-gradient(circle, var(--banner-bg-start), var(--banner-bg-end) 60%);
-  /* background-color: var(--banner-bg-color); */
   padding: 15px;
-
-  /* these will be unnecessary once we get the banner image */
   color: white;
   text-align: center;
 }
@@ -58,7 +53,8 @@ body {
 #table {
   height: 40vh;
   min-height: 350px;
-  width: 300px;
+  width: 90%;
+  max-width: 350px;
   box-shadow: 0px 2px 4px 0.1px var(--produce-gray);
   border-radius: 8px;
   border: 1px solid var(--produce-gray);
@@ -80,7 +76,6 @@ body {
   background-color: var(--search-gray);
   border: none;
   outline: 0;
-  /* setting up search icon */
   background-image: url("assets/search.png");
   background-size: 10px 10px;
   background-position: 7px 7px;
@@ -107,15 +102,15 @@ body {
 #getlink-button {
   border: none;
   border-radius: 3px;
-  padding: 4px 6px 4px 6px;
-  background-color: var(--a-rank);
+  padding: 4px 6px;
+  background-color: var(--default-rank);
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: white;
 }
-#getlink-button:active { /* these styles are active while get link is being pressed */
-  background-color: #ff2475;
+#getlink-button:active {
+  background-color: #7a3e89;
 }
 #getlink-textbox {
   margin-left: 5px;
@@ -125,7 +120,7 @@ body {
   padding: 5px;
   padding-right: 50px;
   flex: 1;
-  display:none;
+  display: none;
 }
 #copylink-button {
   height: inherit;
@@ -135,27 +130,28 @@ body {
   border-radius: 0px 3px 3px 0;
   background-color: var(--save-box-gray);
   font-weight: 700;
-  display:none;
+  display: none;
 }
-#copylink-button:active { /* these styles are active while copylink is being pressed */
+#copylink-button:active {
   background-color: var(--other-name-gray);
 }
 
 /* Styles for table entries */
 #table__entry-container {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .table__entry {
   display: flex;
   align-items: flex-start;
   border-bottom: 1px solid var(--produce-gray);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 .table__entry:last-child {
-	border-bottom: none;
+  border-bottom: none;
 }
 .table__entry:hover {
-  background-color: #f0f0f0;
+  background-color: #e9d9f0;
 }
 .table__entry-icon {
   border-radius: 50%;
@@ -165,31 +161,16 @@ body {
   display: block;
   box-sizing: border-box;
   position: relative;
-  /* background-image: url(assets/trainees/leegaeun.jpg);
-  background-size: 60px; */
 }
 .table__entry-img {
   border-radius: 50%;
   width: inherit;
   height: inherit;
 }
-.eliminated .table__entry-img {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+.eliminated .table__entry-img,
+.eliminated .ranking__entry-img {
+  -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-}
-/* only applied when an entry is selected/checked */
-.table__entry-check {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
-  /* blue background */
-  background-color: var(--checked-blue);
-  /* the padding insets the checkbox (makes it bigger/smaller) */
-  padding: 10px;
-  box-sizing: border-box;
 }
 .table__entry-icon-border {
   position: absolute;
@@ -200,7 +181,8 @@ body {
   border-radius: 50%;
   box-sizing: border-box;
 }
-.table__entry-icon-crown, .ranking__entry-icon-crown {
+.table__entry-icon-crown,
+.ranking__entry-icon-crown {
   position: absolute;
   padding: 2px;
   box-sizing: border-box;
@@ -219,41 +201,23 @@ body {
   background-origin: content-box;
 }
 
-/* Different entry borders */
-.s-rank-border {
-  border: 5px solid var(--s-rank);
-}
-.j-rank-border {
-  border: 5px solid var(--j-rank);
-}
-.c-rank-border {
-  border: 5px solid var(--c-rank);
-}
-.t-rank-border {
-  border: 5px solid var(--t-rank);
-}
-.u-rank-border {
-  border: 5px solid var(--u-rank);
-}
+/* Entry borders */
 .default-rank-border {
   border: 3px solid var(--default-rank);
 }
 .no-rank-border {
   border: none;
 }
-.eliminated .table__entry-icon-border {
-  border: 3px solid var(--no-rank);
-}
+.eliminated .table__entry-icon-border,
 .eliminated .ranking__entry-icon-border {
   border: 3px solid var(--no-rank);
 }
-.ranking__entry-icon-border.dragged-over { /* defines a border for when you drag over a trainee in ranking */
+.ranking__entry-icon-border.dragged-over {
   border: 3px solid var(--checked-green);
 }
 
 .table__entry-text {
-  margin: auto 5px auto 5px;
-  /* margin: auto auto; */
+  margin: auto 5px;
 }
 .table__entry-text .name {
   font-size: 12px;
@@ -271,7 +235,6 @@ body {
 
 /* Ranking Styles */
 #ranking__pyramid {
-  /* min-width: 350px; */
   margin: 40px 40px 10px 40px;
   display: flex;
   flex-direction: column;
@@ -304,10 +267,6 @@ body {
   width: inherit;
   height: inherit;
 }
-.eliminated .ranking__entry-img {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
-}
 .ranking__entry-icon-border {
   position: absolute;
   top: 0;
@@ -326,10 +285,9 @@ body {
   bottom: -5px;
   margin: auto;
   border-radius: 50%;
-  background-color: var(--p-rank);
+  background-color: var(--default-rank);
   box-sizing: border-box;
   padding: 2px;
-  /* badge text options */
   font-weight: 900;
   font-size: 8px;
   text-align: center;
@@ -341,28 +299,6 @@ body {
   text-align: center;
 }
 
-/* Styles for different badge colors */
-.bg-no {
-  background-color: var(--no-rank);
-}
-.bg-s {
-  background-color: var(--s-rank);
-}
-.bg-j {
-  background-color: var(--j-rank);
-}
-.bg-c {
-  background-color: var(--c-rank);
-}
-.bg-t {
-  background-color: var(--t-rank);
-}
-.bg-u {
-  background-color: var(--u-rank);
-}
-.bg-default {
-  background-color: var(--default-rank);
-}
 .eliminated .ranking__entry-icon-badge {
   background-color: var(--no-rank);
 }
@@ -383,7 +319,6 @@ body {
 .flex-container {
   display: flex;
   flex-wrap: wrap-reverse;
-  /* align-items: center; */
   justify-content: center;
 }
 
