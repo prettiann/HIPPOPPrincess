@@ -94,7 +94,7 @@ function populateRanking(){
       entry.className="ranking__entry";
       entry.innerHTML = `
         <div class="ranking__entry-view">
-          <img class="ranking__entry-img" src="${t?t.image:'assets/crown.PNG'}">
+          <img class="ranking__entry-img" src="${t?t.image:'assets/crown.png'}">
           <div class="ranking__entry-icon-border"></div>
           ${t?'<div class="ranking__entry-icon-crown"></div>':''}
           <div class="ranking__entry-icon-badge">${rankIndex+1}</div>
