@@ -209,12 +209,15 @@ function populateRankingEntry(trainee, currRank) {
 
 // Event handlers
 function tableClicked(trainee) {
-  if (trainee.selected) {
-    let success = removeRankedTrainee(trainee);
-    if (success) { trainee.selected = !trainee.selected; } else { return; }
-  } else {
+  if (!trainee.selected) {
+    // Add to ranking only if not already selected
     let success = addRankedTrainee(trainee);
-    if (success) { trainee.selected = true; } else { return; }
+    if (success) { 
+      trainee.selected = true;
+    }
+  } else {
+    // Do nothing here if trainee is already in ranking
+    // Removal should only happen when clicking the ranking
   }
   rerenderTable();
   rerenderRanking();
